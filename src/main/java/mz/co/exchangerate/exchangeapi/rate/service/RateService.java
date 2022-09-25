@@ -12,5 +12,6 @@ public interface RateService {
     Rate findById(Integer id);
     List<Rate> findAll();
     List<Rate> findByBaseCurrencyCode(String base_currency_code);
+    Rate findRateByBaseCurrencyAndTargetCurrency(String base_code, String target_code);
 //    Rate findByBaseCurrencyCodeAndTargetCurrencyCode(String base_currency,String target_currency);
 }

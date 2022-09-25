@@ -1,5 +1,7 @@
 package mz.co.exchangerate.exchangeapi.currency.rest;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.currency.domain.entity.Currency;
 import mz.co.exchangerate.exchangeapi.currency.rest.dto.CurrencyUpdateDTO;
@@ -16,28 +18,34 @@ public class CurrencyController {
     private final CurrencyService currencyService;
 
     @GetMapping
+    @ApiOperation("Get All Currencies")
     public List<Currency> findAll(){
         return currencyService.findAll();
     }
 
     @GetMapping("{id}")
-    public Currency findOne(@PathVariable Integer id){
+    @ApiOperation("Get currency by ID")
+    public Currency findOne(@PathVariable @ApiParam("Currency ID") Integer id){
         return currencyService.findOne(id);
     }
 
     @GetMapping("/code/{code}")
-    public Currency findByCode(@PathVariable String code){
+    @ApiOperation("Get currency by Code")
+    public Currency findByCode(@PathVariable @ApiParam("Currency Code") String code){
         return currencyService.findByCode(code);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Save a new Currency")
     public void create(@RequestBody CurrencyUpdateDTO currency){
         currencyService.create(currency);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Integer id, @RequestBody CurrencyUpdateDTO dto){
+    @ApiOperation("Update Currency")
+
+    public void update(@PathVariable @ApiParam("Currency ID") Integer id, @RequestBody CurrencyUpdateDTO dto){
         currencyService.update(id, dto);
     }
 }

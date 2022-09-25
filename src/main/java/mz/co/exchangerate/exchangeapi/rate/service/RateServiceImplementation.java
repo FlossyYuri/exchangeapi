@@ -3,6 +3,7 @@ package mz.co.exchangerate.exchangeapi.rate.service;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.currency.domain.entity.Currency;
 import mz.co.exchangerate.exchangeapi.currency.domain.repository.CurrencyRepository;
+import mz.co.exchangerate.exchangeapi.pair.rest.dto.PairResponseDTO;
 import mz.co.exchangerate.exchangeapi.rate.domain.entity.Rate;
 import mz.co.exchangerate.exchangeapi.rate.domain.repository.RateRepository;
 import mz.co.exchangerate.exchangeapi.rate.rest.dto.RateCreateDTO;
@@ -56,6 +57,11 @@ public class RateServiceImplementation implements RateService{
     @Override
     public List<Rate> findByBaseCurrencyCode(String base_currency_code) {
         return rateRepository.findByBaseCurrencyCode(base_currency_code);
+    }
+
+    @Override
+    public Rate findRateByBaseCurrencyAndTargetCurrency(String base_code, String target_code) {
+        return rateRepository.findRateByBaseCurrencyAndTargetCurrency(base_code,target_code);
     }
 
 }

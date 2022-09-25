@@ -16,9 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CurrencyServiceImplementation  implements CurrencyService{
     private final CurrencyRepository currencyRepository;
+    private  final CurrencyMapper currencyMapper;
     @Override
     public void create(CurrencyUpdateDTO currency) {
-        Currency createdCurrency = CurrencyMapper.INSTANCE.toCurrency(currency);
+        Currency createdCurrency = currencyMapper.toCurrency(currency);
         currencyRepository.save(createdCurrency);
     }
 
@@ -26,7 +27,7 @@ public class CurrencyServiceImplementation  implements CurrencyService{
     public void update(Integer id, CurrencyUpdateDTO dto) {
         System.out.println(dto);
         currencyRepository.findById(id).map(currency -> {
-            Currency updatedCurrency = CurrencyMapper.INSTANCE.toCurrency(dto);
+            Currency updatedCurrency = currencyMapper.toCurrency(dto);
             updatedCurrency.setId(currency.getId());
             System.out.println(updatedCurrency);
             currencyRepository.save(updatedCurrency);
