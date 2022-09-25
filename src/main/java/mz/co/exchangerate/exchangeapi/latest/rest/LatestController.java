@@ -1,5 +1,7 @@
 package mz.co.exchangerate.exchangeapi.latest.rest;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.latest.rest.dto.LatestResponseDTO;
 import mz.co.exchangerate.exchangeapi.latest.service.LatestService;
@@ -15,7 +17,8 @@ public class LatestController {
     private final LatestService latestService;
 
     @GetMapping("{code}")
-    public LatestResponseDTO findByCode(@PathVariable String code){
+    @ApiOperation("Get Latest Exchange Rate By Base Currency Code")
+    public LatestResponseDTO findByCode(@PathVariable @ApiParam("Base Currency Code") String code){
         return latestService.findByCode(code);
     }
 }
