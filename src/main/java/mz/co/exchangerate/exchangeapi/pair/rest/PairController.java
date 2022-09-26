@@ -1,5 +1,6 @@
 package mz.co.exchangerate.exchangeapi.pair.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.pair.rest.dto.PairResponseDTO;
 import mz.co.exchangerate.exchangeapi.pair.service.PairService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(name = "pair",path = "/pair")
 @RequiredArgsConstructor
+@Tag(name = "Pair", description = "Manipulate Pair")
 public class PairController {
     private final PairService pairService;
     @GetMapping("{base_code}/{target_code}")
