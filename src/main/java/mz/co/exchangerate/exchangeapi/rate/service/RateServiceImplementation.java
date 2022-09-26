@@ -6,6 +6,7 @@ import mz.co.exchangerate.exchangeapi.currency.domain.repository.CurrencyReposit
 import mz.co.exchangerate.exchangeapi.pair.rest.dto.PairResponseDTO;
 import mz.co.exchangerate.exchangeapi.rate.domain.entity.Rate;
 import mz.co.exchangerate.exchangeapi.rate.domain.repository.RateRepository;
+import mz.co.exchangerate.exchangeapi.rate.rest.dto.RateCreateByCurrenciesCodeDTO;
 import mz.co.exchangerate.exchangeapi.rate.rest.dto.RateCreateDTO;
 import mz.co.exchangerate.exchangeapi.rate.rest.dto.RateUpdateDTO;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,25 @@ public class RateServiceImplementation implements RateService{
         Currency base_currency = currencyRepository.findById(idBaseCurrency).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         Currency target_currency = currencyRepository.findById(idTargetCurrency).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+        saveRate(base_currency,target_currency, currency.getConversion_rate());
+    }
+
+    @Override
+    public void createByCurrenciesCode(RateCreateByCurrenciesCodeDTO currency) {
+        String baseCurrencyCode = currency.getBase_currency();
+        String targetCurrencyCode = currency.getTarget_currency();
+
+        Currency base_currency = currencyRepository.findByCode(baseCurrencyCode);
+        Currency target_currency = currencyRepository.findByCode(targetCurrencyCode);
+
+        saveRate(base_currency,target_currency, currency.getConversion_rate());
+    }
+
+    private  void saveRate(Currency base_currency,Currency target_currency,Float conversion_rate){
         Rate rate = new Rate();
         rate.setBase_currency(base_currency);
         rate.setTarget_currency(target_currency);
-        rate.setConversion_rate(currency.getConversion_rate());
+        rate.setConversion_rate(conversion_rate);
         rateRepository.save(rate);
     }
 
