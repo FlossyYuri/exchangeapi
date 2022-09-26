@@ -1,6 +1,7 @@
 package mz.co.exchangerate.exchangeapi.history.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.history.domain.entity.History;
@@ -25,7 +26,7 @@ public class HistoryController {
 
     @GetMapping("{code}")
     @Operation(description = "Get History by Base Currency Code")
-    public List<History> findAll(@PathVariable String code){
+    public List<History> findAll(@PathVariable @Parameter(name = "code",description = "Base Currency Code") String code){
         return historyService.findByRateBaseCurrencyCode(code);
     }
 }

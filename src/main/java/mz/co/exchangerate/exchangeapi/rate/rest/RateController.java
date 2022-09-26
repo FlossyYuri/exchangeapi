@@ -1,6 +1,5 @@
 package mz.co.exchangerate.exchangeapi.rate.rest;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +18,6 @@ import java.util.List;
 @RequestMapping(path = "/rate",name = "rate")
 @RequiredArgsConstructor
 @Tag(name = "Exchange Rate", description = "Manipulate Rate")
-@OpenAPIDefinition(tags = {  })
 public class RateController {
 
     private final RateService rateService;
@@ -38,7 +36,7 @@ public class RateController {
 
     @GetMapping("/code/{base_code}")
     @Operation(description = "Get Rate by Base Currency Code")
-    public List<Rate> findByCode(@PathVariable @Parameter(name = "id",description = "Base Currency ID") String base_code){
+    public List<Rate> findByCode(@PathVariable @Parameter(name = "code",description = "Base Currency Code") String base_code){
         return rateService.findByBaseCurrencyCode(base_code);
     }
 

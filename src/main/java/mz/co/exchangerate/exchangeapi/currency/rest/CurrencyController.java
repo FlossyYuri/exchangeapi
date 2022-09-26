@@ -1,6 +1,7 @@
 package mz.co.exchangerate.exchangeapi.currency.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.currency.domain.entity.Currency;
@@ -27,13 +28,13 @@ public class CurrencyController {
 
     @GetMapping("{id}")
     @Operation(description = "Get currency by ID")
-    public Currency findOne(@PathVariable Integer id){
+    public Currency findOne(@PathVariable @Parameter(name = "id",description = "Currency ID") Integer id){
         return currencyService.findOne(id);
     }
 
     @GetMapping("/code/{code}")
     @Operation(description = "Get currency by Code")
-    public Currency findByCode(@PathVariable String code){
+    public Currency findByCode(@PathVariable @Parameter(name = "code",description = "Currency code") String code){
         return currencyService.findByCode(code);
     }
 
@@ -47,7 +48,7 @@ public class CurrencyController {
     @PutMapping("{id}")
     @Operation(description = "Update Currency")
 
-    public void update(@PathVariable Integer id, @Valid @RequestBody CurrencyUpdateDTO dto){
+    public void update(@PathVariable @Parameter(name = "id",description = "Currency ID") Integer id, @Valid @RequestBody CurrencyUpdateDTO dto){
         currencyService.update(id, dto);
     }
 }

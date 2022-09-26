@@ -1,6 +1,7 @@
 package mz.co.exchangerate.exchangeapi.latest.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import mz.co.exchangerate.exchangeapi.latest.rest.dto.LatestResponseDTO;
@@ -19,7 +20,7 @@ public class LatestController {
 
     @GetMapping("{code}")
     @Operation(description = "Get Latest Exchange Rate By Base Currency Code")
-    public LatestResponseDTO findByCode(@PathVariable String code){
+    public LatestResponseDTO findByCode(@PathVariable @Parameter(name = "code",description = "Currency Code") String code){
         return latestService.findByCode(code);
     }
 }
