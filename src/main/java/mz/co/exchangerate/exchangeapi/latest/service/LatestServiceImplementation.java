@@ -18,7 +18,6 @@ public class LatestServiceImplementation implements LatestService {
     @Override
     public LatestResponseDTO findByCode(String code) {
         List<Rate> rates = rateService.findByBaseCurrencyCode(code);
-        System.out.println(rates);
         LatestResponseDTO latestResponseDTO = new LatestResponseDTO();
         latestResponseDTO.setBase_code(code);
         latestResponseDTO.setResult("success");

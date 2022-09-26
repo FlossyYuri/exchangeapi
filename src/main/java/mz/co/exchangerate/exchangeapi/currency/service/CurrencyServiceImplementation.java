@@ -33,11 +33,9 @@ public class CurrencyServiceImplementation  implements CurrencyService{
 
     @Override
     public void update(Integer id, CurrencyUpdateDTO dto) {
-        System.out.println(dto);
         currencyRepository.findById(id).map(currency -> {
             Currency updatedCurrency = currencyMapper.toCurrency(dto);
             updatedCurrency.setId(currency.getId());
-            System.out.println(updatedCurrency);
             currencyRepository.save(updatedCurrency);
 
             return currency;
